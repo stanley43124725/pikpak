@@ -21,6 +21,16 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/list.vue')
       },
       {
+        path: 'video',
+        name: 'video',
+        component: () => import('../views/list.vue')
+      },
+      {
+        path: 'image',
+        name: 'image',
+        component: () => import('../views/list.vue')
+      },
+      {
         path: 'trash',
         name: 'trash',
         component: () => import('../views/trash.vue')
@@ -41,6 +51,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/t/:id?',
     name: 'test',
     component: () => import('../views/test.vue')
+  },
+  {
+    path: '/s/:id/:password?',
+    name: 'shareInfo',
+    component: () => import('../views/shareInfo.vue'),
   },
   {
     path: '/login',

@@ -143,9 +143,9 @@ const loginPost = () => {
       positiveText: '确定',
       negativeText: '不确定',
       onPositiveClick: () => {
+        window.localStorage.setItem('pikpakLoginData', JSON.stringify(loginData.value))
       },
       onNegativeClick: () => {
-        window.localStorage.setItem('pikpakLoginData', JSON.stringify(loginData.value))
       },
     })
   } else {
@@ -154,7 +154,8 @@ const loginPost = () => {
 }
 const proxyData = ref('')
 const proxyPost = () => {
-  window.localStorage.setItem('proxy', JSON.stringify(proxyData.value))
+  let proxyValue = proxyData.value.split('\n').filter(item => item != '')
+  window.localStorage.setItem('proxy', JSON.stringify(proxyValue))
   window.localStorage.setItem('isSettingProxy', 'true')
 }
 const proxyReset = () => {
