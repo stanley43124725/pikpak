@@ -449,7 +449,14 @@ import axios from 'axios';
                       getFile(row.id)
                         .then((res:any) => {
                           const render =  (template:string) => {
-                            return template.replace(/\{\{(.*?)\}\}/g, (match, key) => res.data[key.trim()]);
+                            return template.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+                              key = key.trim()
+                              let data = res.data[key]
+                              if(key === 'web_content_link' && res.data.medias && res.data.medias.length > 0) {
+                                data = res.data.medias[0]?.link?.url || data
+                              }
+                              return data
+                            });
                           }
                           if(keyMenu.type === 'a') {
                             window.open(render(keyMenu.content), '_target')
@@ -839,12 +846,16 @@ import axios from 'axios';
       })
   }
   const aria2Post = (res:any, dir?:string) => {
+    let url = res.data.web_content_link
+    if(res.data.medias && res.data.medias.length) {
+      url = res.data.medias[0]?.link?.url || url
+    }
     let postData:any = {
         id:'',
         jsonrpc:'2.0',
         method:'aria2.addUri',
         params:[
-            [res.data.web_content_link],
+            [url],
             {
               out: res.data.name
             }
