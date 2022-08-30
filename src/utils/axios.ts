@@ -26,6 +26,7 @@ instance.interceptors.response.use(response => {
   if(response.status) {
     switch (response.status) {
       case 401:
+        console.log(1)
         // router.push('/login')
         const loginData = window.localStorage.getItem('pikpakLoginData')
         const loginDataJson = loginData ? JSON.parse(loginData) : {}
@@ -60,7 +61,7 @@ instance.interceptors.response.use(response => {
           })
         } else {
           router.push('/login')
-          return false
+          return Promise.reject(error)
         }
         
         break;

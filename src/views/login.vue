@@ -25,7 +25,7 @@
           <n-form-item label="">
             <a target="_blank" href="https://i.mypikpak.com/v1/file/center/account/v1/password/?type=forget_password&locale=zh-cn" class="forget-password">忘记密码</a>
             <router-link to="/register" class="register">注册</router-link>
-            <a href="javascript:;" @click="getApk">去下载注册</a>
+            <a href="javascript:;" @click="getApk">去下载注册得5天VIP</a>
           </n-form-item>
         </n-form>
         <div class="login-other">
@@ -59,12 +59,13 @@
 import { ref } from '@vue/reactivity';
 import { NForm, NFormItem, NInput, NButton, useMessage, NCheckbox, useDialog, NTooltip, NIcon, NSpace } from 'naive-ui'
 import http from '../utils/axios'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { BrandGoogle, Phone } from '@vicons/tabler'
 const loginData = ref({
   username: '',
   password: ''
 })
+const route  = useRoute()
 const loading = ref(false)
 const router = useRouter()
 const message = useMessage()
@@ -88,7 +89,7 @@ const loginPost = () => {
           window.localStorage.removeItem('pikpakLoginData')
         }
         message.success('登录成功')
-        router.push('/')
+        router.push((route.query.redirect || '/') + '')
       }
     })
     .catch(() => {

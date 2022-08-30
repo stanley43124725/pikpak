@@ -847,9 +847,9 @@ import axios from 'axios';
   }
   const aria2Post = (res:any, dir?:string) => {
     let url = res.data.web_content_link
-    if(res.data.medias && res.data.medias.length) {
-      url = res.data.medias[0]?.link?.url || url
-    }
+    // if(res.data.medias && res.data.medias.length) {
+    //   url = res.data.medias[0]?.link?.url || url
+    // }
     let postData:any = {
         id:'',
         jsonrpc:'2.0',
@@ -1090,11 +1090,11 @@ import axios from 'axios';
         key: 'base',
         disabled: row.kind !== 'drive#folder'
       },
-      {
-        label: '分享到资源库',
-        key: 'share',
-        disabled: !row.hash
-      },
+      // {
+      //   label: '分享到资源库',
+      //   key: 'share',
+      //   disabled: !row.hash
+      // },
       {
         label: '删除',
         key: 'delete'
